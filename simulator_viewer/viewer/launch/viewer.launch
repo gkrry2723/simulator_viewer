@@ -1,0 +1,38 @@
+<launch>
+  <node pkg="xycar_imu" type="9dof_imu_node.py" name="xycar_imu" output="screen">
+    <param name="rviz_mode" type="string" value="false" />
+  </node>
+  
+  <node name="usb_cam" pkg="usb_cam" type="usb_cam_node" output="screen" >
+    <param name="video_device" value="/dev/video0" />
+    <param name="autoexposure" value="false"/>
+    <param name="exposure" value="150"/>
+    <param name="image_width" value="320"/>
+    <param name="image_height" value="240"/>
+    <param name="pixel_format" value="yuyv" />
+    <param name="camera_frame_id" value="usb_cam" />
+    <param name="io_method" value="mmap"/>
+    <param name="camera_info_url" value="file://$(find usb_cam)/yaml/usb_cam.yaml" />
+  </node>
+
+  <node name="viewer" pkg="viewer" type="viewer" output="screen" >
+    <param name="cam_topic0" type="string" value="/usb_cam/image_raw"/>
+    <param name="cam_topic1" type="string" value="/usb_cam/image_raw"/>
+    <param name="cam_topic2" type="string" value="/usb_cam/image_raw"/>
+    <param name="cam_topic3" type="string" value="/usb_cam/image_raw"/>
+    <param name="cam_topic4" type="string" value="/usb_cam/image_raw"/>
+    <param name="cam_topic5" type="string" value="/usb_cam/image_raw"/>
+    <param name="cam_topic6" type="string" value="/usb_cam/image_raw"/>
+    <param name="cam_topic7" type="string" value="/usb_cam/image_raw"/>
+
+    <param name="grid_topic0" type="string" value="/imu"/>
+    <param name="grid_topic1" type="string" value="/imu"/>
+    <param name="grid_topic2" type="string" value="/imu"/>
+    <param name="grid_topic3" type="string" value="/imu"/>
+    <param name="grid_topic4" type="string" value="/imu"/>
+    <param name="grid_topic5" type="string" value="/imu"/>
+    <param name="grid_topic6" type="string" value="/imu"/>
+    <param name="grid_topic7" type="string" value="/imu"/>
+    <param name="map_topic0" type="string" value="/"/>
+  </node>
+</launch>
